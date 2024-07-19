@@ -18,14 +18,11 @@ function App() {
 		formState: { errors },
 	} = useForm()
 
-	const passwordRef = useRef()
 	const countryRef = useRef()
 
-	const [passwordErrors, setPasswordErrors] = useState([])
 	const [countryErrors, setCountryErrors] = useState([])
 
 	function onSubmit(data) {
-		console.log(data)
 		alert('Success')
 	}
 
@@ -49,7 +46,7 @@ function App() {
 					})}
 				/>
 			</FormGroup>
-			<FormGroup errors={passwordErrors}>
+			<FormGroup errorMessage={errors?.password?.message}>
 				<label className='label' htmlFor='password'>
 					Password
 				</label>
@@ -57,7 +54,30 @@ function App() {
 					className='input'
 					type='password'
 					id='password'
-					ref={passwordRef}
+					{...register('password', {
+						required: { value: true, message: 'Required' },
+						minLength: {
+							value: 10,
+							message: 'Must be at least 10 characters',
+						},
+						validate: {
+							hasLowerCase: value => {
+								if (!value.match(/[a-z]/)) {
+									return 'Must include at least 1 lowercase letter'
+								}
+							},
+							hasUpperCase: value => {
+								if (!value.match(/[A-Z]/)) {
+									return 'Must include at least 1 uppercase letter'
+								}
+							},
+							hasNumber: value => {
+								if (!value.match(/[0-9]/)) {
+									return 'Must include at least 1 number'
+								}
+							},
+						},
+					})}
 				/>
 			</FormGroup>
 			<FormGroup errors={countryErrors}>
