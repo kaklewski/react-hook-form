@@ -1,8 +1,6 @@
 import { FormGroup } from './FormGroup'
 import ReactSelect from 'react-select'
-import { useRef, useState } from 'react'
 import './styles.css'
-import { checkCountry, checkEmail, checkPassword } from './validators'
 import { useForm } from 'react-hook-form'
 
 const COUNTRY_OPTIONS = [
@@ -17,10 +15,6 @@ function App() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
-
-	const countryRef = useRef()
-
-	const [countryErrors, setCountryErrors] = useState([])
 
 	function onSubmit(data) {
 		alert('Success')
