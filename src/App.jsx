@@ -11,6 +11,11 @@ const COUNTRY_OPTIONS = [
 ]
 
 function App() {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
 
 	const emailRef = useRef()
 	const passwordRef = useRef()
